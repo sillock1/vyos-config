@@ -1,0 +1,30 @@
+; Make sure to update the epoch time in the SOA records so coreDNS picks up the changes automatically
+; https://www.epochconverter.com/
+
+; SOA Records
+$TTL 3600
+$ORIGIN 1.10.in-addr.arpa.
+@ 3600 IN SOA gateway.pill.ac. gateway.pill.ac. (
+  1682790096         ; serial number (epoch timestamp)
+  7200               ; refresh period
+  3600               ; retry period
+  1209600            ; expire time
+  3600               ; minimum ttl
+)
+
+; NS Records
+@                          IN  NS gateway.pill.ac.
+
+; Reset origin
+$ORIGIN in-addr.arpa.
+
+; LAN
+1.0.1.10                   IN  PTR  gateway.pill.ac.
+
+; Servers
+20.7.1.10                  IN  PTR  polaris.pill.ac.
+21.7.1.10                  IN  PTR  rigel.pill.ac.
+22.7.1.10                  IN  PTR  sirius.pill.ac.
+30.7.1.10                  IN  PTR  mercury.pill.ac.
+31.7.1.10                  IN  PTR  venus.pill.ac.
+32.7.1.10                  IN  PTR  earth.pill.ac.
