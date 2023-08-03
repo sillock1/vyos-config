@@ -25,7 +25,7 @@ if [ -f "/config/vyos-config/secrets.sops.env" ]; then
   export SOPS_AGE_KEY_FILE=/config/secrets/age.key
 
   mapfile environmentAsArray < <(
-    sops --decrypt "/config/secrets.sops.env" |
+    sops --decrypt "/config/vyos-config/secrets.sops.env" |
       grep --invert-match '^#' |
       grep --invert-match '^\s*$'
   ) # Uses grep to remove commented and blank lines
