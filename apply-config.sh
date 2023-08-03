@@ -1,3 +1,39 @@
+#!/bin/vbash
+# shellcheck shell=bash
+dry_run=true
+
+if [ "$(id -g -n)" != 'vyattacfg' ] ; then
+  exec sg vyattacfg -c "/bin/vbash $(readlink -f "$0") $*"
+fi
+
+while getopts "c" options; do
+  case "${options}" in
+  # -c Commit changes - default is dry-run
+  c)
+    echo 'Will commit changes'
+    dry_run=false
+    ;;
+  *)
+    echo 'error in command line parsing' >&2
+    exit 1
+    ;;
+  esac
+done
+
+# Load secrets into ENV vars
+if [ -f "/config/secrets.sops.env" ]; then
+  export SOPS_AGE_KEY_FILE=/config/secrets/age.key
+
+  mapfile environmentAsArray < <(
+    sops --decrypt "/config/secrets.sops.env" |
+      grep --invert-match '^#' |
+      grep --invert-match '^\s*$'
+  ) # Uses grep to remove commented and blank lines
+  for variableDeclaration in "${environmentAsArray[@]}"; do
+    export "${variableDeclaration//[$'\r\n']/}" # The substitution removes the line breaks
+  done
+fi
+
 # Apply environment to container (configuration) files
 restart_containers=""
 while IFS= read -r -d '' file
