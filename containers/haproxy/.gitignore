@@ -6,4 +6,4 @@
 
 !/config/
 /config/*
-!/config/haproxy.cfg
+!/config/vyos-config/haproxy.cfg

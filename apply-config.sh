@@ -66,7 +66,7 @@ source /opt/vyatta/etc/functions/script-template
 load /opt/vyatta/etc/config.boot.default
 
 # Load all config files
-for f in /config/config-parts/*.sh; do
+for f in /config/vyos-config/config-parts/*.sh; do
   if [ -f "${f}" ]; then
     echo "Processing ${f}"
     # shellcheck source=/dev/null
