@@ -1,6 +1,6 @@
 #!/bin/vbash
 
-set firewall group network-group INTERNAL_TRUSTED network ‘192.168.10.0/24’
+set firewall group network-group INTERNAL_TRUSTED network '192.168.10.0/24'
 set firewall group network-group INTERNAL_UNIFI_MANAGEMENT network '192.168.1.0/24'
 
 set firewall group address-group nas address '10.1.7.10'
