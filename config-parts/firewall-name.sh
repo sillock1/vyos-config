@@ -122,6 +122,15 @@ set firewall name WAN-SERVERS rule 5 state related enable
 set firewall name WAN-SERVERS rule 5 state new enable
 set firewall name WAN-SERVERS rule 5 description "Allow EST/Related/New Traffic from Trusted VLAN"
 set firewall name WAN-SERVERS rule 5 source group network-group INTERNAL_TRUSTED
+set firewall name WAN-SERVERS rule 10 action accept
+set firewall name WAN-SERVERS rule 10 state established enable
+set firewall name WAN-SERVERS rule 10 state related enable
+set firewall name WAN-SERVERS rule 10 state new enable
+set firewall name WAN-SERVERS rule 10 description "Allow HTTP/S from Trusted VLAN"
+set firewall name WAN-SERVERS rule 10 destination port 80
+set firewall name WAN-SERVERS rule 10 destination port 443
+set firewall name WAN-SERVERS rule 10 protocol tcp
+set firewall name WAN-SERVERS rule 10 source group network-group INTERNAL_TRUSTED
 
 set firewall name WAN-LAN rule 5 action accept
 set firewall name WAN-LAN rule 5 state established enable
