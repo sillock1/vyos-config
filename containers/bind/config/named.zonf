@@ -40,6 +40,18 @@ controls {
   inet 127.0.0.1 allow { localhost; } keys { "rndc-key"; };
 };
 
+zone "sillock.io." {
+  type master;
+  file "/etc/bind/zones/db.sillock.io";
+  journal "/var/cache/bind/db.sillock.io.jnl";
+  allow-transfer {
+    key "externaldns";
+  };
+  update-policy {
+    grant externaldns zonesub ANY;
+  };
+};
+
 zone "pill.ac." {
   type master;
   file "/etc/bind/zones/db.pill.ac";
