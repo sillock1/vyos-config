@@ -34,6 +34,6 @@ set firewall zone CONTAINERS default-action drop
 set firewall zone CONTAINERS description 'VyOS containers zone'
 set firewall zone CONTAINERS from LAN firewall name LAN-CONTAINERS
 set firewall zone CONTAINERS from LOCAL firewall name LOCAL-CONTAINERS
-set firewall zone CONTAINERS from SERVERS firewall name SERVER-CONTAINERS
+set firewall zone CONTAINERS from SERVERS firewall name SERVERS-CONTAINERS
 set firewall zone CONTAINERS from WAN firewall name WAN-CONTAINERS
 set firewall zone CONTAINERS interface POD-CONTAINERS
