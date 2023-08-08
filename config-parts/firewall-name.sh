@@ -32,6 +32,18 @@ set firewall name LOCAL-SERVERS rule 999 description 'Rule: drop_invalid'
 set firewall name LOCAL-SERVERS rule 999 state invalid 'enable'
 set firewall name LOCAL-SERVERS rule 999 log 'enable'
 
+# From LOCAL to CONTAINERS
+set firewall name LOCAL-CONTAINERS default-action 'accept'
+set firewall name LOCAL-CONTAINERS description 'From LOCAL to CONTAINERS'
+set firewall name LOCAL-CONTAINERS rule 40 action 'accept'
+set firewall name LOCAL-CONTAINERS rule 40 description 'Rule: accept_dns'
+set firewall name LOCAL-CONTAINERS rule 40 destination port 'domain,domain-s'
+set firewall name LOCAL-CONTAINERS rule 40 protocol 'tcp_udp'
+set firewall name LOCAL-CONTAINERS rule 999 action 'drop'
+set firewall name LOCAL-CONTAINERS rule 999 description 'Rule: drop_invalid'
+set firewall name LOCAL-CONTAINERS rule 999 state invalid 'enable'
+set firewall name LOCAL-CONTAINERS rule 999 log 'enable'
+
 # From LAN to WAN
 set firewall name LAN-WAN default-action accept
 
@@ -46,6 +58,15 @@ set firewall name LAN-SERVERS rule 999 action 'drop'
 set firewall name LAN-SERVERS rule 999 description 'Rule: drop_invalid'
 set firewall name LAN-SERVERS rule 999 state invalid 'enable'
 set firewall name LAN-SERVERS rule 999 log 'enable'
+
+# From LAN to CONTAINERS
+set firewall name LAN-CONTAINERS default-action 'drop'
+set firewall name LAN-CONTAINERS description 'From LAN to CONTAINERS'
+set firewall name LAN-CONTAINERS enable-default-log
+set firewall name LAN-CONTAINERS rule 999 action 'drop'
+set firewall name LAN-CONTAINERS rule 999 description 'Rule: drop_invalid'
+set firewall name LAN-CONTAINERS rule 999 state invalid 'enable'
+set firewall name LAN-CONTAINERS rule 999 log 'enable'
 
 # From SERVERS to LAN
 set firewall name SERVERS-LAN default-action 'drop'
@@ -92,6 +113,23 @@ set firewall name SERVERS-LOCAL rule 999 description 'Rule: drop_invalid'
 set firewall name SERVERS-LOCAL rule 999 state invalid 'enable'
 set firewall name SERVERS-LOCAL rule 999 log 'enable'
 
+# From SERVERS to CONTAINERS
+set firewall name SERVERS-CONTAINERS default-action 'accept'
+set firewall name SERVERS-CONTAINERS description 'From SERVERS to CONTAINERS'
+set firewall name SERVERS-CONTAINERS enable-default-log
+set firewall name SERVERS-CONTAINERS rule 40 action 'accept'
+set firewall name SERVERS-CONTAINERS rule 40 description 'Rule: accept_dns'
+set firewall name SERVERS-CONTAINERS rule 40 destination port 'domain,domain-s'
+set firewall name SERVERS-CONTAINERS rule 40 protocol 'tcp_udp'
+set firewall name SERVERS-CONTAINERS rule 100 action 'accept'
+set firewall name SERVERS-CONTAINERS rule 100 description 'Rule: accept_k8s_nodes'
+set firewall name SERVERS-CONTAINERS rule 100 protocol 'tcp'
+set firewall name SERVERS-CONTAINERS rule 100 source group address-group 'k8s_nodes'
+set firewall name SERVERS-CONTAINERS rule 999 action 'drop'
+set firewall name SERVERS-CONTAINERS rule 999 description 'Rule: drop_invalid'
+set firewall name SERVERS-CONTAINERS rule 999 state invalid 'enable'
+set firewall name SERVERS-CONTAINERS rule 999 log 'enable'
+
 # From SERVERS to WAN
 set firewall name SERVERS-WAN default-action 'accept'
 set firewall name SERVERS-WAN description 'From SERVERS to WAN'
@@ -131,6 +169,18 @@ set firewall name WAN-SERVERS rule 10 destination port 80
 set firewall name WAN-SERVERS rule 10 destination port 443
 set firewall name WAN-SERVERS rule 10 protocol tcp
 set firewall name WAN-SERVERS rule 10 source group network-group INTERNAL_TRUSTED
+
+# From WAN to CONTAINERS
+set firewall name WAN-CONTAINERS default-action 'accept'
+set firewall name WAN-CONTAINERS description 'From WAN to CONTAINERS'
+set firewall name WAN-CONTAINERS rule 40 action 'accept'
+set firewall name WAN-CONTAINERS rule 40 description 'Rule: accept_dns'
+set firewall name WAN-CONTAINERS rule 40 destination port 'domain,domain-s'
+set firewall name WAN-CONTAINERS rule 40 protocol 'tcp_udp'
+set firewall name WAN-CONTAINERS rule 999 action 'drop'
+set firewall name WAN-CONTAINERS rule 999 description 'Rule: drop_invalid'
+set firewall name WAN-CONTAINERS rule 999 state invalid 'enable'
+set firewall name WAN-CONTAINERS rule 999 log 'enable'
 
 set firewall name WAN-LAN rule 5 action accept
 set firewall name WAN-LAN rule 5 state established enable
@@ -226,3 +276,44 @@ set firewall name WAN-LAN rule 999 action 'drop'
 set firewall name WAN-LAN rule 999 description 'Rule: drop_invalid'
 set firewall name WAN-LAN rule 999 state invalid 'enable'
 set firewall name WAN-LAN rule 999 log 'enable'
+
+
+# From CONTAINERS to LAN
+set firewall name CONTAINERS-LAN default-action 'drop'
+set firewall name CONTAINERS-LAN description 'From CONTAINERS to LAN'
+set firewall name CONTAINERS-LAN enable-default-log
+set firewall name CONTAINERS-LAN rule 999 action 'drop'
+set firewall name CONTAINERS-LAN rule 999 description 'Rule: drop_invalid'
+set firewall name CONTAINERS-LAN rule 999 state invalid 'enable'
+set firewall name CONTAINERS-LAN rule 999 log 'enable'
+
+# From CONTAINERS to LOCAL
+set firewall name CONTAINERS-LOCAL default-action 'drop'
+set firewall name CONTAINERS-LOCAL description 'From CONTAINERS to LOCAL'
+set firewall name CONTAINERS-LOCAL enable-default-log
+set firewall name CONTAINERS-LOCAL rule 50 action 'accept'
+set firewall name CONTAINERS-LOCAL rule 50 description 'Rule: accept_dhcp'
+set firewall name CONTAINERS-LOCAL rule 50 destination port '67,68'
+set firewall name CONTAINERS-LOCAL rule 50 protocol 'udp'
+set firewall name CONTAINERS-LOCAL rule 50 source port '67,68'
+set firewall name CONTAINERS-LOCAL rule 60 action 'accept'
+set firewall name CONTAINERS-LOCAL rule 60 description 'Rule: accept_ntp'
+set firewall name CONTAINERS-LOCAL rule 60 destination port 'ntp'
+set firewall name CONTAINERS-LOCAL rule 60 protocol 'udp'
+set firewall name CONTAINERS-LOCAL rule 999 action 'drop'
+set firewall name CONTAINERS-LOCAL rule 999 description 'Rule: drop_invalid'
+set firewall name CONTAINERS-LOCAL rule 999 state invalid 'enable'
+set firewall name CONTAINERS-LOCAL rule 999 log 'enable'
+
+# From CONTAINERS to SERVERS
+set firewall name CONTAINERS-SERVERS default-action 'accept'
+set firewall name CONTAINERS-SERVERS description 'From CONTAINERS to SERVERS'
+set firewall name CONTAINERS-SERVERS rule 999 action 'drop'
+set firewall name CONTAINERS-SERVERS rule 999 description 'Rule: drop_invalid'
+set firewall name CONTAINERS-SERVERS rule 999 state invalid 'enable'
+set firewall name CONTAINERS-SERVERS rule 999 log 'enable'
+
+
+# From CONTAINERS to WAN
+set firewall name CONTAINERS-WAN default-action 'accept'
+set firewall name CONTAINERS-WAN description 'From CONTAINERS to WAN'
