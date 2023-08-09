@@ -21,11 +21,11 @@ while getopts "c" options; do
 done
 
 # Load secrets into ENV vars
-if [ -f "/config/vyos-config/secrets.sops.env" ]; then
+if [ -f "/config/secrets.sops.env" ]; then
   export SOPS_AGE_KEY_FILE=/config/secrets/age.key
 
   mapfile environmentAsArray < <(
-    sops --decrypt "/config/vyos-config/secrets.sops.env" |
+    sops --decrypt "/config/secrets.sops.env" |
       grep --invert-match '^#' |
       grep --invert-match '^\s*$'
   ) # Uses grep to remove commented and blank lines
@@ -66,7 +66,7 @@ source /opt/vyatta/etc/functions/script-template
 load /opt/vyatta/etc/config.boot.default
 
 # Load all config files
-for f in /config/vyos-config/config-parts/*.sh; do
+for f in /config/config-parts/*.sh; do
   if [ -f "${f}" ]; then
     echo "Processing ${f}"
     # shellcheck source=/dev/null
@@ -80,7 +80,7 @@ if "$dry_run"; then
 else
   # Pull new container images
   mapfile -t AVAILABLE_IMAGES < <(run show container image | awk '{ if ( NR > 1  ) { print $1 ":" $2} }')
-  mapfile -t CONFIG_IMAGES < <(sed -nr "s/set container name .* image '(.*)'/\1/p" /config/vyos-config/config-parts/* | uniq)
+  mapfile -t CONFIG_IMAGES < <(sed -nr "s/set container name .* image '(.*)'/\1/p" /config/config-parts/* | uniq)
 
   for image in "${CONFIG_IMAGES[@]}"; do
     if [[ ! " ${AVAILABLE_IMAGES[*]} " =~ \ ${image}\  ]]; then
@@ -115,6 +115,6 @@ else
 fi
 
 # Clean annoying overlay* folders
-sudo find "/config/vyos-config" -name "overlay*" -type d -prune -exec rm -rf "{}" \;
+sudo find "/config" -name "overlay*" -type d -prune -exec rm -rf "{}" \;
 
 exit

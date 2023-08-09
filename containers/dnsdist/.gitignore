@@ -6,4 +6,4 @@
 
 !/config/
 /config/*
-!/config/vyos-config/dnsdist.conf
+!/config/dnsdist.conf
