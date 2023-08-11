@@ -307,6 +307,7 @@ set firewall name CONTAINERS-LOCAL rule 999 log 'enable'
 
 # From CONTAINERS to SERVERS
 set firewall name CONTAINERS-SERVERS default-action 'accept'
+set firewall name CONTAINERS-SERVERS enable-default-log
 set firewall name CONTAINERS-SERVERS description 'From CONTAINERS to SERVERS'
 set firewall name CONTAINERS-SERVERS rule 999 action 'drop'
 set firewall name CONTAINERS-SERVERS rule 999 description 'Rule: drop_invalid'
@@ -316,4 +317,5 @@ set firewall name CONTAINERS-SERVERS rule 999 log 'enable'
 
 # From CONTAINERS to WAN
 set firewall name CONTAINERS-WAN default-action 'accept'
+set firewall name CONTAINERS-WAN enable-default-log
 set firewall name CONTAINERS-WAN description 'From CONTAINERS to WAN'
