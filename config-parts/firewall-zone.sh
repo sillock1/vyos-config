@@ -1,39 +1,39 @@
 #!/bin/vbash
 
 #LAN Zone
-set firewall zone LAN default-action drop
-set firewall zone LAN from WAN firewall name WAN-LAN
-set firewall zone LAN from LOCAL firewall name LOCAL-LAN
-set firewall zone LAN from SERVERS firewall name SERVERS-LAN
-set firewall zone LAN from CONTAINERS firewall name CONTAINERS-LAN
-set firewall zone LAN interface eth1
+set firewall zone lan default-action drop
+set firewall zone lan from wan firewall name wan-lan
+set firewall zone lan from local firewall name local-lan
+set firewall zone lan from servers firewall name servers-lan
+set firewall zone lan from containers firewall name containers-lan
+set firewall zone lan interface 'eth1'
 
 #
-set firewall zone LOCAL local-zone
-set firewall zone LOCAL default-action drop
-set firewall zone LOCAL from LAN firewall name LAN-LOCAL
-set firewall zone LOCAL from WAN firewall name WAN-LOCAL
-set firewall zone LOCAL from SERVERS firewall name SERVERS-LOCAL
-set firewall zone LOCAL from CONTAINERS firewall name CONTAINERS-LOCAL
+set firewall zone local local-zone
+set firewall zone local default-action drop
+set firewall zone local from lan firewall name lan-local
+set firewall zone local from wan firewall name wan-local
+set firewall zone local from servers firewall name servers-local
+set firewall zone local from containers firewall name containers-local
 
-set firewall zone WAN default-action drop
-set firewall zone WAN from LAN firewall name LAN-WAN
-set firewall zone WAN from LOCAL firewall name LOCAL-WAN
-set firewall zone WAN from SERVERS firewall name SERVERS-WAN
-set firewall zone WAN from CONTAINERS firewall name CONTAINERS-WAN
-set firewall zone WAN interface eth0
+set firewall zone wan default-action drop
+set firewall zone wan from lan firewall name lan-wan
+set firewall zone wan from local firewall name local-wan
+set firewall zone wan from servers firewall name servers-wan
+set firewall zone wan from containers firewall name containers-wan
+set firewall zone wan interface 'eth0'
 
-set firewall zone SERVERS default-action drop
-set firewall zone SERVERS from LAN firewall name LAN-SERVERS
-set firewall zone SERVERS from LOCAL firewall name LOCAL-SERVERS
-set firewall zone SERVERS from WAN firewall name WAN-SERVERS
-set firewall zone SERVERS from CONTAINERS firewall name CONTAINERS-SERVERS
-set firewall zone SERVERS interface 'eth1.70'
+set firewall zone servers default-action drop
+set firewall zone servers from lan firewall name lan-servers
+set firewall zone servers from local firewall name local-servers
+set firewall zone servers from wan firewall name wan-servers
+set firewall zone servers from containers firewall name containers-servers
+set firewall zone servers interface 'eth1.70'
 
-set firewall zone CONTAINERS default-action drop
-set firewall zone CONTAINERS description 'VyOS containers zone'
-set firewall zone CONTAINERS from LAN firewall name LAN-CONTAINERS
-set firewall zone CONTAINERS from LOCAL firewall name LOCAL-CONTAINERS
-set firewall zone CONTAINERS from SERVERS firewall name SERVERS-CONTAINERS
-set firewall zone CONTAINERS from WAN firewall name WAN-CONTAINERS
-set firewall zone CONTAINERS interface POD-CONTAINERS
+set firewall zone containers default-action drop
+set firewall zone containers description 'VyOS containers zone'
+set firewall zone containers from lan firewall name lan-containers
+set firewall zone containers from local firewall name local-containers
+set firewall zone containers from servers firewall name servers-containers
+set firewall zone containers from wan firewall name wan-containers
+set firewall zone containers interface 'pod-containers'
