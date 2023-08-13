@@ -18,13 +18,18 @@ $ORIGIN pill.ac.
 ; LAN
 gateway                       IN  A  10.1.0.1
 
-; Servers
+; K8s
 polaris                       IN  A  10.1.7.20
 rigel                         IN  A  10.1.7.21
 sirius                        IN  A  10.1.7.22
 mercury                       IN  A  10.1.7.30
 venus                         IN  A  10.1.7.31
 earth                         IN  A  10.1.7.32
+
+; Servers
+nas                           IN  A  10.1.7.10
+spawner                       IN  A  10.1.7.50
+pikvm                         IN  A  10.1.7.100
 
 ; Containers
 cluster-production            IN  A  10.5.0.2
