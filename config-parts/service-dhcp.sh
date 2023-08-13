@@ -18,7 +18,7 @@ set service dhcp-server shared-network-name SERVERS subnet 10.1.7.0/24 range 0 s
 set service dhcp-server shared-network-name SERVERS subnet 10.1.7.0/24 static-mapping nas ip-address '10.1.7.10'
 set service dhcp-server shared-network-name SERVERS subnet 10.1.7.0/24 static-mapping nas mac-address 'f0:79:59:6e:b8:e1'
 
-set service dhcp-server shared-network-name SERVERS subnet 10.1.7.0/24 static-mapping pivkm ip-address '10.1.7.100'
+set service dhcp-server shared-network-name SERVERS subnet 10.1.7.0/24 static-mapping pikvm ip-address '10.1.7.100'
 set service dhcp-server shared-network-name SERVERS subnet 10.1.7.0/24 static-mapping pikvm mac-address 'd8:3a:dd:38:2a:e8'
 
 set service dhcp-server shared-network-name SERVERS subnet 10.1.7.0/24 static-mapping polaris ip-address '10.1.7.20'
