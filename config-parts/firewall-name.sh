@@ -169,6 +169,13 @@ set firewall name wan-servers rule 10 destination port 80
 set firewall name wan-servers rule 10 destination port 443
 set firewall name wan-servers rule 10 protocol tcp
 set firewall name wan-servers rule 10 source group network-group internal_trusted
+#Allow IoT to servers
+set firewall name wan-servers rule 20 action 'accept'
+set firewall name iot-servers rule 20 description 'Rule: accept_plex_from_plex_clients'
+set firewall name iot-servers rule 20 destination group address-group 'k8s_plex'
+set firewall name iot-servers rule 20 destination port '32400'
+set firewall name iot-servers rule 20 protocol 'tcp'
+set firewall name iot-servers rule 20 source group address-group 'plex_clients'
 
 # from wan to containers
 set firewall name wan-containers default-action 'accept'

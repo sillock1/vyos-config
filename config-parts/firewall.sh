@@ -27,3 +27,5 @@ set firewall group address-group k8s_ingress address '10.45.0.3'
 set firewall group address-group k8s_vector_aggregator address '10.45.0.2'
 set firewall group address-group k8s_mqtt address '10.45.0.10'
 set firewall group address-group k8s_plex address '10.45.0.20'
+
+set firewall group address-group plex_clients address '192.168.30.10'
