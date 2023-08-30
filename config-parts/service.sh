@@ -10,5 +10,5 @@ delete service ntp server
 set service ntp server uk.pool.ntp.org
 
 # SSH server
-#set service ssh disable-password-authentication
+set service ssh disable-password-authentication
 set service ssh port '22'

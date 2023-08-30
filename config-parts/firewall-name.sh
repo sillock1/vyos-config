@@ -169,6 +169,14 @@ set firewall name wan-servers rule 10 destination port 80
 set firewall name wan-servers rule 10 destination port 443
 set firewall name wan-servers rule 10 protocol tcp
 set firewall name wan-servers rule 10 source group network-group internal_trusted
+set firewall name wan-servers rule 20 action accept
+set firewall name wan-servers rule 20 state established enable
+set firewall name wan-servers rule 20 state related enable
+set firewall name wan-servers rule 20 state new enable
+set firewall name wan-servers rule 20 description "allow plex from wan"
+set firewall name wan-servers rule 20 destination port 32400
+set firewall name wan-servers rule 20 protocol tcp
+
 #Allow IoT to servers
 set firewall name wan-servers rule 20 action 'accept'
 set firewall name wan-servers rule 20 description 'Rule: accept_plex_from_plex_clients'
