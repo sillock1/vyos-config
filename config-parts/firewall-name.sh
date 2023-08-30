@@ -174,16 +174,9 @@ set firewall name wan-servers rule 20 state established enable
 set firewall name wan-servers rule 20 state related enable
 set firewall name wan-servers rule 20 state new enable
 set firewall name wan-servers rule 20 description "allow plex from wan"
+set firewall name wan-servers rule 20 destination group address-group 'k8s_plex'
 set firewall name wan-servers rule 20 destination port 32400
 set firewall name wan-servers rule 20 protocol tcp
-
-#Allow IoT to servers
-set firewall name wan-servers rule 20 action 'accept'
-set firewall name wan-servers rule 20 description 'Rule: accept_plex_from_plex_clients'
-set firewall name wan-servers rule 20 destination group address-group 'k8s_plex'
-set firewall name wan-servers rule 20 destination port '32400'
-set firewall name wan-servers rule 20 protocol 'tcp'
-set firewall name wan-servers rule 20 source group address-group 'plex_clients'
 
 # from wan to containers
 set firewall name wan-containers default-action 'accept'
