@@ -2,6 +2,7 @@
 /*
 
 # Track certain files and directories
+!/readme.md
 !.gitignore
 !/.sops.yaml
 !/apply-config.sh
