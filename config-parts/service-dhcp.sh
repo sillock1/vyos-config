@@ -9,7 +9,7 @@ set service dhcp-server shared-network-name LAN subnet '10.1.0.0/24' default-rou
 set service dhcp-server shared-network-name SERVERS authoritative
 set service dhcp-server shared-network-name SERVERS ping-check
 set service dhcp-server shared-network-name SERVERS subnet 10.1.7.0/24 default-router '10.1.7.1'
-set service dhcp-server shared-network-name SERVERS subnet 10.1.7.0/24 domain-name 'vyos.pill.ac'
+set service dhcp-server shared-network-name SERVERS subnet 10.1.7.0/24 domain-name 'gateway.pill.ac'
 set service dhcp-server shared-network-name SERVERS subnet 10.1.7.0/24 lease '86400'
 set service dhcp-server shared-network-name SERVERS subnet 10.1.7.0/24 name-server '10.5.0.4'
 set service dhcp-server shared-network-name SERVERS subnet 10.1.7.0/24 range 0 start '10.1.7.200'
