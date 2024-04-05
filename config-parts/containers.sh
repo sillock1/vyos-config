@@ -60,3 +60,18 @@ set container name node-exporter volume rootfs mode 'ro'
 set container name node-exporter volume sysfs source '/sys'
 set container name node-exporter volume sysfs destination '/host/sys'
 set container name node-exporter volume sysfs mode 'ro'
+
+# Matchbox
+mkdir -p /config/containers/matchbox/data/{assets,groups,profiles}
+set container name matchbox arguments '-address=0.0.0.0:80 -log-level=debug'
+set container name matchbox cap-add 'net-bind-service'
+set container name matchbox image 'quay.io/poseidon/matchbox:v0.11.0'
+set container name matchbox memory '0'
+set container name matchbox network containers address '10.5.0.5'
+set container name matchbox shared-memory '0'
+set container name matchbox volume matchbox-data destination '/var/lib/matchbox'
+set container name matchbox volume matchbox-data mode 'rw'
+set container name matchbox volume matchbox-data propagation 'private'
+set container name matchbox volume matchbox-data source '/config/containers/matchbox/data'
+curl -L -o /config/containers/matchbox/data/assets/kernel-amd64 https://factory.talos.dev/image/d715f723f882b1e1e8063f1b89f237dcc0e3bd000f9f970243af59c8baae0100/v1.6.7/kernel-amd64
+curl -L -o /config/containers/matchbox/data/assets/initramfs-amd64.xz https://factory.talos.dev/image/d715f723f882b1e1e8063f1b89f237dcc0e3bd000f9f970243af59c8baae0100/v1.6.7/initramfs-amd64.xz

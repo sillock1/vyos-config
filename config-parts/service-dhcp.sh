@@ -41,3 +41,13 @@ set service dhcp-server shared-network-name SERVERS subnet 10.1.7.0/24 static-ma
 set service dhcp-server shared-network-name SERVERS subnet 10.1.7.0/24 static-mapping venus mac-address 'd8:9e:f3:93:85:d8'
 set service dhcp-server shared-network-name SERVERS subnet 10.1.7.0/24 static-mapping earth ip-address '10.1.7.32'
 set service dhcp-server shared-network-name SERVERS subnet 10.1.7.0/24 static-mapping earth mac-address '6c:2b:59:d2:97:cd'
+
+set service dhcp-server global-parameters 'option system-arch code 93 = unsigned integer 16;'
+set service dhcp-server shared-network-name SERVERS subnet 10.1.7.0/24 subnet-parameters 'allow bootp;'
+set service dhcp-server shared-network-name SERVERS subnet 10.1.7.0/24 subnet-parameters 'allow booting;'
+set service dhcp-server shared-network-name SERVERS subnet 10.1.7.0/24 subnet-parameters 'next-server 192.168.0.1;'
+set service dhcp-server shared-network-name SERVERS subnet 10.1.7.0/24 subnet-parameters 'if exists user-class and option user-class = &quot;iPXE&quot; {'
+set service dhcp-server shared-network-name SERVERS subnet 10.1.7.0/24 subnet-parameters 'filename &quot;http://10.5.0.5/boot.ipxe&quot;;'
+set service dhcp-server shared-network-name SERVERS subnet 10.1.7.0/24 subnet-parameters '} else {'
+set service dhcp-server shared-network-name SERVERS subnet 10.1.7.0/24 subnet-parameters 'filename &quot;ipxe.efi&quot;;'
+set service dhcp-server shared-network-name SERVERS subnet 10.1.7.0/24 subnet-parameters '}'
